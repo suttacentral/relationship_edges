@@ -5,4 +5,5 @@ description = "Add your description here"
 requires-python = ">=3.14"
 dependencies = [
     "polars>=1.41.2",
+    "pytest>=9.1.0",
 ]
