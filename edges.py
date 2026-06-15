@@ -26,3 +26,9 @@ def branch_count() -> pl.expr.Expr:
 
 def in_both_branches(count: pl.Series) -> pl.Series:
     return count.replace_strict({2: True, 1: False}, return_dtype=pl.Boolean)
+
+
+def resembling_mentions(df: pl.DataFrame) -> pl.DataFrame:
+    return df.filter(
+        pl.col('resembling') & pl.col('type').eq('mention')
+    )
