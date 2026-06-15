@@ -11,13 +11,13 @@ def test_series_equality():
 def test_branch_count():
     df = pl.DataFrame(
         {
-            '_to': ['abc', 'abc'],
-            '_from': ['pqr', 'pqr'],
-            'branch': ['main', 'refactored'],
+            '_to': ['abc', 'abc', 'abc'],
+            '_from': ['pqr', 'pqr', 'xyz'],
+            'branch': ['main', 'refactored', 'refactored'],
         }
     )
 
     df = df.with_columns(
         branch_count().alias('branch_count')
     )
-    assert_series_equal(df['branch_count'], pl.Series('branch_count', [2, 2], dtype=pl.UInt32))
+    assert_series_equal(df['branch_count'], pl.Series('branch_count', [2, 2, 1], dtype=pl.UInt32))
