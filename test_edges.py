@@ -1,7 +1,7 @@
 import polars as pl
 from polars.testing import assert_series_equal
 
-from edges import branch_count
+from edges import branch_count, in_both_branches
 
 
 def test_series_equality():
@@ -21,3 +21,11 @@ def test_branch_count():
         branch_count().alias('branch_count')
     )
     assert_series_equal(df['branch_count'], pl.Series('branch_count', [2, 2, 1], dtype=pl.UInt32))
+
+
+def test_both_branches():
+    count = pl.Series('branch_count', [2, 2, 1], dtype=pl.UInt32)
+    assert_series_equal(
+        in_both_branches(count).alias('in_both_branches'),
+        pl.Series('in_both_branches', [True, True, False], dtype=pl.Boolean)
+    )
