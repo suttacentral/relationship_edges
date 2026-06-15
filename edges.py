@@ -1,6 +1,5 @@
 import polars as pl
 
-
 columns = ['_from', '_to', 'from', 'to', 'number', 'remark', 'resembling', 'type']
 
 
@@ -19,3 +18,7 @@ def combine() -> pl.DataFrame:
             get_refactored().with_columns(pl.lit('refactored').alias('branch'))
         ]
     )
+
+
+def branch_count() -> pl.expr.Expr:
+    return pl.col('branch').n_unique().over(pl.struct(pl.exclude('branch')))
