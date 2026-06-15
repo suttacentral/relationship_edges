@@ -41,7 +41,7 @@ def test_resembling_mentions():
     )
 
     assert_frame_equal(
-        resembling_mentions(df),
+        df.filter(resembling_mentions()),
         pl.DataFrame(
             {
                 'id': ['a'],
